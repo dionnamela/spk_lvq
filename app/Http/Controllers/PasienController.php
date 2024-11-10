@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
 
@@ -26,8 +27,8 @@ class PasienController extends Controller
             'no_hp' => $request->no_hp,
         ]);
 
-        // Menyimpan pesan sukses ke session dengan tipe 'success'
-        return redirect()->back()->with(['message' => 'Data pasien berhasil ditambahkan!', 'type' => 'success']);
+        Alert::success('Sukses', 'Data telah ditambahkan!');
+        return redirect('/data-pasien');
     }
 
     public function destroy($id)

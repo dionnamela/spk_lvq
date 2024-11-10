@@ -1,5 +1,6 @@
 <x-layout-user>
     <x-slot:title>{{ $title }}</x-slot:title>
+   
     <div class="card-header pb-0">
         <h6>Data Pasien</h6>
         <div class="d-flex justify-content-between">
@@ -9,7 +10,6 @@
                     Tambah Data
                 </button>
             </div>
-
             <div>
                 {{ $pasiens->links('pagination::bootstrap-5') }}
             </div>
