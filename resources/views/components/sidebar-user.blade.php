@@ -66,14 +66,23 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa fa-power-off text-dark text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Logout</span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                        @csrf
+
+                        <a class="nav-link" href="#"
+                            onclick="event.preventDefault(); 
+                            if (confirm('Apakah Anda yakin ingin logout?')) {
+                                this.closest('form').submit();
+                            }">
+                            <div
+                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-power-off text-dark text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Logout</span>
+                        </a>
+                    </form>
                 </li>
+
             </ul>
         </div>
     </aside>
@@ -102,7 +111,7 @@
                                 class="d-sm-inline d-none nav-link text-white font-weight-bold px-0nav-link text-white font-weight-bold px-0nav-link text-white font-weight-bold px-0">
 
                                 <i class="fa fa-user me-sm-1"></i>
-                                Selamat Datang
+                                Selamat Datang "{{ Auth::user()->name }}"
                             </span>
 
                         </li>
