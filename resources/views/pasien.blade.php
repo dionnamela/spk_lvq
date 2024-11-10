@@ -1,7 +1,5 @@
 <x-layout-user>
     <x-slot:title>{{ $title }}</x-slot:title>
-
-    <!-- Button dan Modal untuk Tambah Data -->
     <div class="card-header pb-0">
         <h6>Data Pasien</h6>
         <div class="d-flex justify-content-between">
@@ -16,14 +14,7 @@
                 {{ $pasiens->links('pagination::bootstrap-5') }}
             </div>
         </div>
-        <!-- Button untuk membuka modal -->
-
     </div>
-
-    <!-- Pagination di atas tabel -->
-
-
-    <!-- Modal Tambah Data -->
     <div class="modal fade" id="tambahDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -32,7 +23,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Form untuk menambah data pasien -->
                     <form action="/simpan-data-pasien" method="POST">
                         @csrf
                         <div class="mb-3">
@@ -53,8 +43,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Tabel Data Pasien -->
     <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
@@ -77,8 +65,6 @@
                             <td class="text-xs font-weight-bold">{{ $p->no_hp }}</td>
                             <td class="text-xs font-weight-bold">
                                 <a href="/edit-data-pasien" class="btn btn-success btn-sm mt-2">Edit</a>
-
-                                <!-- Tombol Hapus dengan konfirmasi -->
                                 <form id="delete-form-{{ $p->id }}"
                                     action="{{ route('pasiens.destroy', $p->id) }}" method="POST"
                                     style="display: inline;">

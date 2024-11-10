@@ -15,14 +15,11 @@ class PasienController extends Controller
     }
     public function store(Request $request)
     {
-        // Validasi data
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:pasiens,email',
             'no_hp' => 'required|string|max:15',
         ]);
-
-        // Simpan data ke dalam database
         Pasien::create([
             'name' => $request->name,
             'email' => $request->email,
