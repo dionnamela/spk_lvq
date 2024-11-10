@@ -10,7 +10,7 @@ class PasienController extends Controller
     public function index()
     {
         $title = 'Halaman Pasien';
-        $pasiens = Pasien::all();
+        $pasiens = Pasien::paginate(10);
         return view('pasien', compact('pasiens', 'title'));
     }
     public function store(Request $request)

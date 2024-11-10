@@ -1,20 +1,27 @@
 <x-layout-user>
     <x-slot:title>{{ $title }}</x-slot:title>
+
     <!-- Button dan Modal untuk Tambah Data -->
     <div class="card-header pb-0">
         <h6>Data Pasien</h6>
-        <!-- Button untuk membuka modal -->
-        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#tambahDataModal">
-            Tambah Data
-        </button>
-
-        <!-- Menampilkan pesan sukses atau error -->
-        @if (session('message'))
-            <div class="alert alert-{{ session('type') }} text-sm text-white">
-                {{ session('message') }}
+        <div class="d-flex justify-content-between">
+            <div>
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#tambahDataModal">
+                    Tambah Data
+                </button>
             </div>
-        @endif
+
+            <div>
+                {{ $pasiens->links('pagination::bootstrap-5') }}
+            </div>
+        </div>
+        <!-- Button untuk membuka modal -->
+
     </div>
+
+    <!-- Pagination di atas tabel -->
+
 
     <!-- Modal Tambah Data -->
     <div class="modal fade" id="tambahDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
@@ -89,5 +96,8 @@
                 </tbody>
             </table>
         </div>
+
     </div>
+
+
 </x-layout-user>
