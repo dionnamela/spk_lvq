@@ -14,10 +14,10 @@
             </a>
         </div>
         <hr class="horizontal dark mt-0">
-        <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/">
+                    <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-tv-2 text-dark text-sm opacity-10"></i>
@@ -26,43 +26,42 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="/data-pasien">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#dataDropdown" role="button"
+                        aria-expanded="false" aria-controls="dataDropdown">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa fa-users text-dark text-sm opacity-10"></i>
+                            <i class="fa fa-database text-dark text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Data Pasien</span>
+                        <span class="nav-link-text ms-1">Master Data</span>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="/data-pengujian">
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa fa-table text-dark text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Data Pelatihan</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="/data-hasil-penelitian">
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-app text-dark text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Data Hasil Penelitian</span>
-                    </a>
-                </li>
+                    <div class="collapse" id="dataDropdown">
+                        <ul class="nav ms-4">
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::is('data-pasien') ? 'active' : '' }}"
+                                    href="/data-pasien">
+                                    <i class="fa fa-users text-dark text-sm opacity-10 me-2"></i>
+                                    <span class="nav-link-text">Data Pasien</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::is('data-pelatihan') ? 'active' : '' }}"
+                                    href="/data-pelatihan">
+                                    <i class="fa fa-table text-dark text-sm opacity-10 me-2"></i>
+                                    <span class="nav-link-text">Data Pelatihan</span>
+                                </a>
+                            </li>
 
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+                        </ul>
+                    </div>
+
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
+                    <a class="nav-link {{ Request::is('data-pelatihan') ? 'active' : '' }}" href="/data-pelatihan">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa fa-lock text-dark text-sm opacity-10"></i>
+                            <i class="fa fa-book text-dark text-sm opacity-10"></i> <!-- Ikon buku -->
                         </div>
-                        <span class="nav-link-text ms-1">Ganti Password</span>
+                        <span class="nav-link-text ms-1">Data Hasil Pelatihan</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -82,9 +81,10 @@
                         </a>
                     </form>
                 </li>
-
             </ul>
         </div>
+
+
     </aside>
     <main class="main-content position-relative border-radius-lg ">
         <!-- Navbar -->

@@ -12,6 +12,9 @@ class PasienController extends Controller
     {
         $title = 'Halaman Pasien';
         $pasiens = Pasien::paginate(10);
+        $modal_title = "Peringatan!";
+        $modal_text = "Apakah anda ingin menghapus data ini?";
+        confirmDelete($modal_title, $modal_text);
         return view('pasien', compact('pasiens', 'title'));
     }
     public function store(Request $request)
@@ -35,8 +38,7 @@ class PasienController extends Controller
     {
         $pasien = Pasien::findOrFail($id);
         $pasien->delete();
-
-        // Menyimpan pesan sukses ke session dengan tipe 'danger'
-        return redirect()->route('pasien.index')->with(['message' => 'Data pasien berhasil dihapus!', 'type' => 'danger']);
+        Alert::success('Sukses', 'Data pasien berhasil dihapus!');
+        return redirect('/data-pasien');
     }
 }

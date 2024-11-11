@@ -1,6 +1,6 @@
 <x-layout-user>
     <x-slot:title>{{ $title }}</x-slot:title>
-   
+
     <div class="card-header pb-0">
         <h6>Data Pasien</h6>
         <div class="d-flex justify-content-between">
@@ -65,17 +65,9 @@
                             <td class="text-xs font-weight-bold">{{ $p->no_hp }}</td>
                             <td class="text-xs font-weight-bold">
                                 <a href="/edit-data-pasien" class="btn btn-success btn-sm mt-2">Edit</a>
-                                <form id="delete-form-{{ $p->id }}"
-                                    action="{{ route('pasiens.destroy', $p->id) }}" method="POST"
-                                    style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
+                                <a href="{{ route('pasiens.destroy', $p->id) }}" class="btn btn-danger btn-sm mt-2"
+                                    data-confirm-delete="true">Hapus</a>
 
-                                    <button type="submit" class="btn btn-danger btn-sm mt-2"
-                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data pasien ini?')">
-                                        Hapus
-                                    </button>
-                                </form>
                             </td>
                         </tr>
                     @endforeach
