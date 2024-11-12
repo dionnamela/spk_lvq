@@ -9,7 +9,7 @@ use App\Http\Controllers\DataPelatihanController;
 
 Route::get('', [DashboardController::class, 'home'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/data-pasien', [PasienController::class, 'index'])->middleware(['auth', 'verified']);
+Route::get('/data-pasien', [PasienController::class, 'index'])->middleware(['auth', 'verified'])->name('pasiens.index');
 
 Route::get('/data-pelatihan', [DataPelatihanController::class, 'index'])->middleware(['auth', 'verified'])->name('data-pelatihan.index');
 
@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
 
 Route::put('/data-pelatihan/{id}', [DataPelatihanController::class, 'update'])->name('trainings.update');
 
+Route::put('/data-pasien/{id}', [PasienController::class, 'update'])->name('pasiens.update');
+
 
 Route::post('/simpan-data-pasien', [PasienController::class, 'store']);
 
@@ -32,4 +34,6 @@ Route::delete('/delete-data-pelatihan/{id}', [DataPelatihanController::class, 'd
 
 
 Route::post('/simpan-data-pelatihan', [DataPelatihanController::class, 'store']);
+
+Route::get('/akurasi', [PasienController::class, 'hitungAkurasi']);
 require __DIR__ . '/auth.php';
