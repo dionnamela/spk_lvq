@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('training_models', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('glukosa_darah_sewaktu');
-            $table->float('glukosa_darah_puasa');
-            $table->float('glukosa_dua_jam');
+            $table->integer('glukosa_darah_sewaktu');
+            $table->integer('glukosa_darah_puasa');
+            $table->integer('glukosa_dua_jam');
             $table->float('hba1c');
-            $table->float('usia');
-            $table->string('kecepatan_gejala');
-            $table->string('riwayat_keluarga');
-            $table->float('berat_badan');
-            $table->string('jenis_kelamin');
-            $table->string('tipe_diabetes');
+            $table->integer('usia');
+            $table->integer('kecepatan_gejala');
+            $table->integer('riwayat_keluarga');
+            $table->integer('berat_badan');
+            $table->integer('jenis_kelamin');
+            $table->integer('tipe_diabetes');
             $table->timestamps();
         });
     }

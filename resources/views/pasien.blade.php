@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="hba1c" class="form-label">HBA1C</label>
-                                            <input type="number" class="form-control" id="hba1c" name="hba1c"
+                                            <input type="text" class="form-control" id="hba1c" name="hba1c"
                                                 required>
                                         </div>
                                         <div class="mb-3">
@@ -179,7 +179,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="hba1c">HBA1C</label>
-                                                                <input type="number" name="hba1c"
+                                                                <input type="text" name="hba1c"
                                                                     class="form-control" id="hba1c"
                                                                     value="{{ $pasien->hba1c }}" required>
                                                             </div>
@@ -232,18 +232,7 @@
                                                                         Perempuan</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label for="tipe_diabetes">Tipe Diabetes</label>
-                                                                <select name="tipe_diabetes" id="tipe_diabetes"
-                                                                    class="form-control">
-                                                                    <option value="0"
-                                                                        {{ $pasien->tipe_diabetes == '0' ? 'selected' : '' }}>
-                                                                        Tipe 1</option>
-                                                                    <option value="1"
-                                                                        {{ $pasien->tipe_diabetes == '1' ? 'selected' : '' }}>
-                                                                        Tipe 2</option>
-                                                                </select>
-                                                            </div>
+
 
                                                         </div>
                                                         <div class="modal-footer">
@@ -273,7 +262,15 @@
                                             <td class="text-xs font-weight-bold">{{ $pasien->riwayat_keluarga }}</td>
                                             <td class="text-xs font-weight-bold">{{ $pasien->berat_badan }}</td>
                                             <td class="text-xs font-weight-bold">{{ $pasien->jenis_kelamin }}</td>
-                                            <td class="text-xs font-weight-bold">{{ $pasien->tipe_diabetes }}</td>
+                                            <td class="text-xs font-weight-bold">
+                                                @php
+                                                    if ($pasien->tipe_diabetes == 1) {
+                                                        echo 'Tipe 1';
+                                                    } else {
+                                                        echo 'Tipe 2';
+                                                    }
+                                                @endphp
+                                            </td>
                                             <td class="text-xs font-weight-bold">
                                                 <a href="#" class="btn btn-success btn-sm mt-2"
                                                     data-bs-toggle="modal"

@@ -32,6 +32,7 @@ class LVQService
             $distances[$key] = $this->calculateDistance($data, $centroid['vector']);
         }
         asort($distances);
+        // dd($distances);
         return key($distances); // Kembalikan index centroid terdekat
     }
 
@@ -77,18 +78,20 @@ class LVQService
     }
 
     // Fungsi untuk menghitung akurasi
-    public function hitungAkurasi($dataUji, $model)
+    public function hitungAkurasi($dataLatih, $model)
     {
         $benar = 0;
-        $total = count($dataUji);
+        $total = count($dataLatih);
 
-        foreach ($dataUji as $data) {
+        foreach ($dataLatih as $data) {
             // Prediksi tipe diabetes dari data uji
             $prediksi = $this->prediksi($data['vector'], $model);
             if ($prediksi == $data['tipe_diabetes']) {
                 $benar++;
             }
         }
+
+        dd($benar);
 
         return ($benar / $total) * 100; // Return akurasi dalam persen
     }

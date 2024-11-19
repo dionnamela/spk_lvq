@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="hba1c" class="form-label">HBA1C</label>
-                                            <input type="number" class="form-control" id="hba1c" name="hba1c"
+                                            <input type="text" class="form-control" id="hba1c" name="hba1c"
                                                 required>
                                         </div>
                                         <div class="mb-3">
@@ -95,7 +95,7 @@
                                         <div class="mb-3">
                                             <label for="tipe_diabetes" class="form-label">Tipe Diabetes</label>
                                             <select class="form-control" name="tipe_diabetes" id="tipe_diabetes">
-                                                <option value="">Pilih Jenis Kelamin</option>
+                                                <option value="">Pilih Tipe Diabetes</option>
                                                 <option value="0">Tipe 1</option>
                                                 <option value="1">Tipe 2</option>
                                             </select>
@@ -186,7 +186,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="hba1c">HBA1C</label>
-                                                                <input type="number" name="hba1c"
+                                                                <input type="text" name="hba1c"
                                                                     class="form-control" id="hba1c"
                                                                     value="{{ $training->hba1c }}" required>
                                                             </div>

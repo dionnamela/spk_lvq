@@ -34,7 +34,7 @@ class PasienController extends Controller
         $validated = $request->validate([
             'name' => 'required|string',
             'glukosa_darah_sewaktu' => 'required|numeric',
-            'glukosa_darah_puasa' => 'required|numeric',
+            'glukosa_darah_puasa' => 'required',
             'glukosa_dua_jam' => 'required|numeric',
             'hba1c' => 'required|numeric',
             'usia' => 'required|numeric',
@@ -113,22 +113,7 @@ class PasienController extends Controller
     {
         $title = 'Akurasi';
         // Ambil data uji dari database atau sumber lain
-        $dataUji = Pasien::all()->map(function ($pasien) {
-            return [
-                'vector' => [
-                    $pasien->glukosa_darah_sewaktu,
-                    $pasien->glukosa_darah_puasa,
-                    $pasien->glukosa_dua_jam,
-                    $pasien->hba1c,
-                    $pasien->usia,
-                    $pasien->kecepatan_gejala,
-                    $pasien->riwayat_keluarga,
-                    $pasien->berat_badan,
-                    $pasien->jenis_kelamin,
-                ],
-                'tipe_diabetes' => $pasien->tipe_diabetes,
-            ];
-        })->toArray();
+
 
         // Ambil data latih dari database
         $dataLatih = Pelatihan::all()->map(function ($pasien) {
@@ -150,14 +135,17 @@ class PasienController extends Controller
 
         // Tentukan jumlah data latih dan data uji
         $jumlahLatih = floor(0.8 * count($dataLatih)); // 80% untuk latih
+        // dd($jumlahLatih);
         $dataLatihSet = array_slice($dataLatih, 0, $jumlahLatih); // Data latih
+        // dd($jumlahLatih);
         $dataUjiSet = array_slice($dataLatih, $jumlahLatih); // Data uji
-
+        // dd($jumlahLatih);
         // Model LVQ sudah dilatih sebelumnya
         $model = $this->lvqService->latihLVQ($dataLatihSet, 2); // 2 adalah jumlah kelas (tipe diabetes)
 
         // Hitung akurasi
         $akurasi = $this->lvqService->hitungAkurasi($dataUjiSet, $model);
+        // dd($model);
 
         return view('/akurasi', ['akurasi' => $akurasi, 'title' => $title]);
     }
@@ -175,7 +163,6 @@ class PasienController extends Controller
             'riwayat_keluarga' => 'required|numeric',
             'berat_badan' => 'required|numeric',
             'jenis_kelamin' => 'required|numeric',
-            'tipe_diabetes' => 'required|numeric',
         ]);
 
         $pasien = Pasien::findOrFail($id);
@@ -191,7 +178,6 @@ class PasienController extends Controller
             'riwayat_keluarga' => $request->riwayat_keluarga,
             'berat_badan' => $request->berat_badan,
             'jenis_kelamin' => $request->jenis_kelamin,
-            'tipe_diabetes' => $request->tipe_diabetes,
         ]);
 
         Alert::success('Sukses', 'Data pasien berhasil diperbarui!');
