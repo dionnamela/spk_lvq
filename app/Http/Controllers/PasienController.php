@@ -160,8 +160,8 @@ class PasienController extends Controller
     }
     public function update(Request $request, $id)
     {
-
-        $request->validate([
+        // Validasi input
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'glukosa_darah_sewaktu' => 'required|numeric',
             'glukosa_darah_puasa' => 'required|numeric',
@@ -174,24 +174,58 @@ class PasienController extends Controller
             'jenis_kelamin' => 'required|numeric',
         ]);
 
+        // Ambil data pasien yang akan diperbarui
         $pasien = Pasien::findOrFail($id);
 
-        $pasien->update([
-            'name' => $request->name,
-            'glukosa_darah_sewaktu' => $request->glukosa_darah_sewaktu,
-            'glukosa_darah_puasa' => $request->glukosa_darah_puasa,
-            'glukosa_dua_jam' => $request->glukosa_dua_jam,
-            'hba1c' => $request->hba1c,
-            'usia' => $request->usia,
-            'kecepatan_gejala' => $request->kecepatan_gejala,
-            'riwayat_keluarga' => $request->riwayat_keluarga,
-            'berat_badan' => $request->berat_badan,
-            'jenis_kelamin' => $request->jenis_kelamin,
-        ]);
+        // Perbarui data pasien
+        $pasien->update($validated);
 
-        Alert::success('Sukses', 'Data pasien berhasil diperbarui!');
+        // Siapkan data untuk prediksi ulang
+        $data = [
+            'vector' => [
+                $validated['glukosa_darah_sewaktu'],
+                $validated['glukosa_darah_puasa'],
+                $validated['glukosa_dua_jam'],
+                $validated['hba1c'],
+                $validated['usia'],
+                $validated['kecepatan_gejala'],
+                $validated['riwayat_keluarga'],
+                $validated['berat_badan'],
+                $validated['jenis_kelamin'],
+            ],
+        ];
+
+        // Ambil seluruh data latih dari database
+        $dataLatih = Pelatihan::all()->map(function ($pelatihan) {
+            return [
+                'vector' => [
+                    $pelatihan->glukosa_darah_sewaktu,
+                    $pelatihan->glukosa_darah_puasa,
+                    $pelatihan->glukosa_dua_jam,
+                    $pelatihan->hba1c,
+                    $pelatihan->usia,
+                    $pelatihan->kecepatan_gejala,
+                    $pelatihan->riwayat_keluarga,
+                    $pelatihan->berat_badan,
+                    $pelatihan->jenis_kelamin,
+                ],
+                'tipe_diabetes' => $pelatihan->tipe_diabetes,
+            ];
+        })->toArray();
+
+        // Latih model LVQ menggunakan seluruh data latih
+        $model = $this->lvqService->latihLVQ($dataLatih, 2); // 2 adalah jumlah kelas (tipe diabetes)
+
+        // Prediksi ulang tipe diabetes menggunakan model yang sudah dilatih
+        $tipe_diabetes = $this->lvqService->prediksi($data['vector'], $model);
+
+        // Perbarui tipe diabetes pada pasien
+        $pasien->update(['tipe_diabetes' => $tipe_diabetes]);
+
+        Alert::success('Sukses', 'Data pasien berhasil diperbarui dan diprediksi ulang!');
         return redirect('/data-pasien');
     }
+
     public function destroy($id)
     {
         $pelatihan = Pasien::findOrFail($id);
