@@ -101,7 +101,7 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                            <table class="table table-striped align-items-center mb-0">
                                 <thead>
                                     <tr>
                                         <th style="width: 20px"
@@ -266,7 +266,7 @@
                                             <td class="text-xs text-center font-weight-bold">{{ $pasien->usia }} Tahun
                                             </td>
                                             <td class="text-xs text-center font-weight-bold">
-                                                @if ($pasien->kecepatan_gejala == '0')
+                                                @if ($pasien->kecepatan_gejala == 0)
                                                     {{ 'Lambat' }}
                                                 @else
                                                     {{ 'Cepat' }}

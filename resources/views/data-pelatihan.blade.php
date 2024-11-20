@@ -37,24 +37,24 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="glukosa_darah_sewaktu" class="form-label">Glukosa Darah
-                                                Sewaktu</label>
+                                                Sewaktu (mg/dl)</label>
                                             <input type="number" class="form-control" id="glukosa_darah_sewaktu"
                                                 name="glukosa_darah_sewaktu" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="glukosa_darah_puasa" class="form-label">Glukosa Darah
-                                                Puasa</label>
+                                                Puasa (mg/dl)</label>
                                             <input type="number" class="form-control" id="glukosa_darah_puasa"
                                                 name="glukosa_darah_puasa" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="glukosa_dua_jam" class="form-label">Glukosa Darah Dua
-                                                Jam</label>
+                                                Jam (mg/dl)</label>
                                             <input type="number" class="form-control" id="glukosa_dua_jam"
                                                 name="glukosa_dua_jam" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="hba1c" class="form-label">HBA1C</label>
+                                            <label for="hba1c" class="form-label">HBA1C (%)</label>
                                             <input type="text" class="form-control" id="hba1c" name="hba1c"
                                                 required>
                                         </div>
@@ -80,7 +80,7 @@
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="berat_badan" class="form-label">Berat Badan</label>
+                                            <label for="berat_badan" class="form-label">Berat Badan (kg)</label>
                                             <input type="number" class="form-control" id="berat_badan"
                                                 name="berat_badan" required>
                                         </div>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                            <table class="table table-striped align-items-center mb-0">
                                 <thead>
                                     <tr>
                                         <th style="width: 20px"
@@ -164,7 +164,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="glukosa_darah_sewaktu">Glukosa Darah
-                                                                    Sewaktu</label>
+                                                                    Sewaktu (mg/dl)</label>
                                                                 <input type="number" name="glukosa_darah_sewaktu"
                                                                     class="form-control" id="glukosa_darah_sewaktu"
                                                                     value="{{ $training->glukosa_darah_sewaktu }}"
@@ -172,26 +172,28 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="glukosa_darah_puasa">Glukosa Darah
-                                                                    Puasa</label>
+                                                                    Puasa (mg/dl)</label>
                                                                 <input type="number" name="glukosa_darah_puasa"
                                                                     class="form-control" id="glukosa_darah_puasa"
                                                                     value="{{ $training->glukosa_darah_puasa }}"
                                                                     required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="glukosa_dua_jam">Glukosa Dua Jam</label>
+                                                                <label for="glukosa_dua_jam">Glukosa Dua Jam
+                                                                    (mg/dl)
+                                                                </label>
                                                                 <input type="number" name="glukosa_dua_jam"
                                                                     class="form-control" id="glukosa_dua_jam"
                                                                     value="{{ $training->glukosa_dua_jam }}" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="hba1c">HBA1C</label>
+                                                                <label for="hba1c">HBA1C (%)</label>
                                                                 <input type="text" name="hba1c"
                                                                     class="form-control" id="hba1c"
                                                                     value="{{ $training->hba1c }}" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="usia">Usia</label>
+                                                                <label for="usia">Usia (tahun)</label>
                                                                 <input type="number" name="usia"
                                                                     class="form-control" id="usia"
                                                                     value="{{ $training->usia }}" required>
@@ -222,7 +224,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="berat_badan">Berat Badan</label>
+                                                                <label for="berat_badan">Berat Badan (kg)</label>
                                                                 <input type="number" name="berat_badan"
                                                                     class="form-control" id="berat_badan"
                                                                     value="{{ $training->berat_badan }}" required>
@@ -268,31 +270,62 @@
                                         <tr>
                                             <th class="text-center text-xs font-weight-bolder opacity-7">
                                                 {{ $index + 1 }}</th>
-                                            <td class="text-xs font-weight-bold">{{ $training->name }}</td>
-                                            <td class="text-xs font-weight-bold">
-                                                {{ $training->glukosa_darah_sewaktu }}</td>
-                                            <td class="text-xs font-weight-bold">{{ $training->glukosa_darah_puasa }}
+                                            <td class="text-xs text-center font-weight-bold">{{ $training->name }}
                                             </td>
-                                            <td class="text-xs font-weight-bold">{{ $training->glukosa_dua_jam }}</td>
-                                            <td class="text-xs font-weight-bold">{{ $training->hba1c }}</td>
-                                            <td class="text-xs font-weight-bold">{{ $training->usia }}</td>
-                                            <td class="text-xs font-weight-bold">{{ $training->kecepatan_gejala }}
+                                            <td class="text-xs text-center font-weight-bold">
+                                                {{ $training->glukosa_darah_sewaktu }} mg/dl</td>
+                                            <td class="text-xs text-center font-weight-bold">
+                                                {{ $training->glukosa_darah_puasa }}
+                                                mg/dl
                                             </td>
-                                            <td class="text-xs font-weight-bold">{{ $training->riwayat_keluarga }}
+                                            <td class="text-xs text-center font-weight-bold">
+                                                {{ $training->glukosa_dua_jam }}
+                                                mg/dl</td>
+                                            <td class="text-xs text-center font-weight-bold">{{ $training->hba1c }} %
                                             </td>
-                                            <td class="text-xs font-weight-bold">{{ $training->berat_badan }}</td>
-                                            <td class="text-xs font-weight-bold">{{ $training->jenis_kelamin }}</td>
-                                            <td class="text-xs font-weight-bold">{{ $training->tipe_diabetes }}</td>
-                                            <td class="text-xs font-weight-bold">
+                                            <td class="text-xs text-center font-weight-bold">{{ $training->usia }}
+                                                tahun</td>
+                                            <td class="text-xs text-center font-weight-bold">
+
+                                                @if ($training->kecepatan_gejala == 0)
+                                                    {{ 'Lambat' }}
+                                                @else
+                                                    {{ 'Cepat' }}
+                                                @endif
+                                            </td>
+                                            <td class="text-xs text-center font-weight-bold">
+                                                @if ($training->riwayat_keluarga == '0')
+                                                    {{ 'Tidak' }}
+                                                @else
+                                                    {{ 'Ya' }}
+                                                @endif
+                                            </td>
+                                            <td class="text-xs text-center font-weight-bold">
+                                                {{ $training->berat_badan }}</td>
+                                            <td class="text-xs text-center font-weight-bold">
+                                                @if ($training->jenis_kelamin == '0')
+                                                    {{ 'Laki-laki' }}
+                                                @else
+                                                    {{ 'Perempuan' }}
+                                                @endif
+                                            </td>
+                                            <td class="text-xs text-center font-weight-bold"> @php
+                                                if ($training->tipe_diabetes == 1) {
+                                                    echo 'Tipe 1';
+                                                } else {
+                                                    echo 'Tipe 2';
+                                                }
+                                            @endphp</td>
+                                            <td class="text-xs text-center font-weight-bold">
                                                 <a href="#" class="btn btn-success btn-sm mt-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#editModal-{{ $training->id }}">
-                                                    Edit
+                                                    <i class="fa fa-edit"></i>
                                                 </a>
 
                                                 <a href="{{ route('trainings.destroy', $training->id) }}"
-                                                    class="btn btn-danger btn-sm mt-2"
-                                                    data-confirm-delete="true">Hapus</a>
+                                                    class="btn btn-danger btn-sm mt-2" data-confirm-delete="true"> <i
+                                                        class="fa fa-trash"></i></a>
 
                                             </td>
                                         </tr>
