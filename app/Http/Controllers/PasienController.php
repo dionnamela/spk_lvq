@@ -113,10 +113,7 @@ class PasienController extends Controller
     {
         $title = 'Akurasi';
         // Ambil data uji dari database atau sumber lain
-
-
-        // Ambil data latih dari database
-        $dataLatih = Pelatihan::all()->map(function ($pasien) {
+        $dataUji = Pasien::all()->map(function ($pasien) {
             return [
                 'vector' => [
                     $pasien->glukosa_darah_sewaktu,
@@ -133,13 +130,31 @@ class PasienController extends Controller
             ];
         })->toArray();
 
+        // Ambil data latih dari database
+        $dataLatih = Pelatihan::all()->map(function ($pelatihan) {
+            return [
+                'vector' => [
+                    $pelatihan->glukosa_darah_sewaktu,
+                    $pelatihan->glukosa_darah_puasa,
+                    $pelatihan->glukosa_dua_jam,
+                    $pelatihan->hba1c,
+                    $pelatihan->usia,
+                    $pelatihan->kecepatan_gejala,
+                    $pelatihan->riwayat_keluarga,
+                    $pelatihan->berat_badan,
+                    $pelatihan->jenis_kelamin,
+                ],
+                'tipe_diabetes' => $pelatihan->tipe_diabetes,
+            ];
+        })->toArray();
+
         // Tentukan jumlah data latih dan data uji
         $jumlahLatih = floor(0.8 * count($dataLatih)); // 80% untuk latih
         // dd($jumlahLatih);
         $dataLatihSet = array_slice($dataLatih, 0, $jumlahLatih); // Data latih
-        // dd($jumlahLatih);
+        // dd($dataLatihSet);
         $dataUjiSet = array_slice($dataLatih, $jumlahLatih); // Data uji
-        // dd($jumlahLatih);
+        // dd($dataUjiSet);
         // Model LVQ sudah dilatih sebelumnya
         $model = $this->lvqService->latihLVQ($dataLatihSet, 2); // 2 adalah jumlah kelas (tipe diabetes)
 

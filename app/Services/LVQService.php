@@ -11,13 +11,14 @@ class LVQService
         $centroids = $this->inisialisasiCentroid($jumlahKelas, $dataLatih);
 
         // Melatih LVQ
-        $epoch = 100; // Jumlah epoch pelatihan
+        $epoch = 1000; // Jumlah epoch pelatihan
         foreach (range(1, $epoch) as $i) {
             foreach ($dataLatih as $data) {
                 // Cari pusat centroid terdekat berdasarkan jarak
                 $centroid = $this->findNearestCentroid($data['vector'], $centroids);
                 // Update centroid berdasarkan jarak
                 $centroids = $this->updateCentroid($data['vector'], $centroid, $centroids);
+                // dd($centroids);
             }
         }
 
@@ -49,7 +50,7 @@ class LVQService
     // Fungsi untuk memperbarui centroid berdasarkan data dan learning rate
     private function updateCentroid($data, $centroidIndex, $centroids)
     {
-        $learningRate = 0.1; // Learning rate
+        $learningRate = 0.025; // Learning rate
         foreach ($data as $key => $value) {
             // Update centroid
             $centroids[$centroidIndex]['vector'][$key] += $learningRate * ($value - $centroids[$centroidIndex]['vector'][$key]);
@@ -60,14 +61,22 @@ class LVQService
     // Fungsi untuk menginisialisasi centroid acak
     private function inisialisasiCentroid($jumlahKelas, $dataLatih)
     {
+        // Tetapkan seed untuk random number generator
+        mt_srand(1234); // Gunakan angka tetap untuk reproducibility
+
         $centroids = [];
         foreach (range(0, $jumlahKelas - 1) as $index) {
             $centroids[$index] = [
-                'vector' => $dataLatih[array_rand($dataLatih)]['vector'],
+                'vector' => $dataLatih[array_rand($dataLatih)]['vector'], // Pemilihan acak dengan seed tetap
             ];
         }
+
+        // Reset seed generator ke keadaan default (opsional jika ada operasi acak lain)
+        mt_srand();
+
         return $centroids;
     }
+
 
     // Fungsi untuk memprediksi data baru
     public function prediksi($data, $model)
@@ -90,8 +99,6 @@ class LVQService
                 $benar++;
             }
         }
-
-        dd($benar);
 
         return ($benar / $total) * 100; // Return akurasi dalam persen
     }
