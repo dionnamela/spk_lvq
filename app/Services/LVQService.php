@@ -100,6 +100,7 @@ class LVQService
             }
         }
 
+        // dd($benar);
         return ($benar / $total) * 100; // Return akurasi dalam persen
     }
 }
