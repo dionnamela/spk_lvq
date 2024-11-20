@@ -34,7 +34,7 @@ class PasienController extends Controller
         $validated = $request->validate([
             'name' => 'required|string',
             'glukosa_darah_sewaktu' => 'required|numeric',
-            'glukosa_darah_puasa' => 'required',
+            'glukosa_darah_puasa' => 'required|numeric',
             'glukosa_dua_jam' => 'required|numeric',
             'hba1c' => 'required|numeric',
             'usia' => 'required|numeric',
@@ -59,10 +59,7 @@ class PasienController extends Controller
             ]
         ];
 
-
-
-
-        // Ambil data latih dari database
+        // Ambil seluruh data latih dari database
         $dataLatih = Pelatihan::all()->map(function ($pasien) {
             return [
                 'vector' => [
@@ -80,13 +77,8 @@ class PasienController extends Controller
             ];
         })->toArray();
 
-        // Tentukan jumlah data latih dan data uji
-        $jumlahLatih = floor(0.8 * count($dataLatih));  // 80% untuk latih
-        $dataLatihSet = array_slice($dataLatih, 0, $jumlahLatih); // Data latih
-        $dataUjiSet = array_slice($dataLatih, $jumlahLatih); // Data uji
-
-        // Latih model LVQ dengan data pelatihan yang diambil dari database
-        $model = $this->lvqService->latihLVQ($dataLatihSet, 2); // 2 adalah jumlah kelas (tipe diabetes)
+        // Latih model LVQ menggunakan seluruh data latih
+        $model = $this->lvqService->latihLVQ($dataLatih, 2); // 2 adalah jumlah kelas (tipe diabetes)
 
         // Menjalankan prediksi LVQ untuk tipe diabetes menggunakan model yang sudah dilatih
         $tipe_diabetes = $this->lvqService->prediksi($data['vector'], $model);
@@ -105,9 +97,11 @@ class PasienController extends Controller
             'jenis_kelamin' => $validated['jenis_kelamin'],
             'tipe_diabetes' => $tipe_diabetes, // Hasil prediksi
         ]);
+
         Alert::success('Sukses', 'Data pelatihan berhasil diperbarui!');
         return redirect('/data-pasien');
     }
+
 
     public function hitungAkurasi()
     {
