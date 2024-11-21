@@ -93,7 +93,9 @@
                                             </select>
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
