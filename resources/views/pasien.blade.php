@@ -216,10 +216,10 @@
                                                                     class="form-control">
                                                                     <option value="0"
                                                                         {{ $pasien->riwayat_keluarga == '0' ? 'selected' : '' }}>
-                                                                        Ya</option>
+                                                                        Tidak</option>
                                                                     <option value="1"
                                                                         {{ $pasien->riwayat_keluarga == '1' ? 'selected' : '' }}>
-                                                                        Tidak</option>
+                                                                        Ya</option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
