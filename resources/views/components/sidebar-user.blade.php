@@ -10,7 +10,7 @@
                 target="_blank">
                 <img src="assets/img/logo-ct-dark.png" width="26px" height="26px" class="navbar-brand-img h-100"
                     alt="main_logo">
-                <span class="ms-1 font-weight-bold">Creative Tim</span>
+                <span class="ms-1 font-weight-bold">SPK Tipe Diabetes</span>
             </a>
         </div>
         <hr class="horizontal dark mt-0">
