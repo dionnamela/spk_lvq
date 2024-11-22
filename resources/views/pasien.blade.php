@@ -128,6 +128,10 @@
                                         </th>
                                         <th class="text-uppercase text-xs font-weight-bolder opacity-7">Tipe Diabetes
                                         </th>
+                                        <th class="text-uppercase text-xs font-weight-bolder opacity-7">Ditambahkan
+                                            pada</th>
+                                        <th class="text-uppercase text-xs font-weight-bolder opacity-7">Diubah pada
+                                        </th>
                                         <th class="text-uppercase text-xs font-weight-bolder opacity-7">Aksi</th>
                                     </tr>
                                 </thead>
@@ -299,6 +303,10 @@
                                                         echo 'Tipe 2';
                                                     }
                                                 @endphp
+                                            </td>
+                                            <td class="text-xs text-center font-weight-bold">{{ $pasien->created_at }}
+                                            </td>
+                                            <td class="text-xs text-center font-weight-bold">{{ $pasien->updated_at }}
                                             </td>
                                             <td class="text-xs font-weight-bold">
                                                 <a href="#" class="btn btn-success btn-sm mt-2"
