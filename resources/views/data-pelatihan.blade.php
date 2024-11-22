@@ -315,7 +315,7 @@
                                                 @endif
                                             </td>
                                             <td class="text-xs text-center font-weight-bold"> @php
-                                                if ($training->tipe_diabetes == 1) {
+                                                if ($training->tipe_diabetes == 0) {
                                                     echo 'Tipe 1';
                                                 } else {
                                                     echo 'Tipe 2';
