@@ -133,6 +133,11 @@
                                         </th>
                                         <th class="text-uppercase text-xs font-weight-bolder opacity-7">Tipe Diabetes
                                         </th>
+                                        <th class="text-uppercase text-xs font-weight-bolder opacity-7">Ditambahkan
+                                            pada
+                                        </th>
+                                        <th class="text-uppercase text-xs font-weight-bolder opacity-7">Diedit pada
+                                        </th>
                                         <th class="text-uppercase text-xs font-weight-bolder opacity-7">Aksi</th>
                                     </tr>
                                 </thead>
@@ -203,7 +208,7 @@
                                                                 <select name="kecepatan_gejala" id="kecepatan_gejala"
                                                                     class="form-control">
                                                                     <option value="0"
-                                                                        {{ $training->kecepatan_gejala == '0' ? 'selected' : '' }}>
+                                                                        {{ $training->kecepatan_gejala == 0 ? 'selected' : '' }}>
                                                                         Lambat</option>
                                                                     <option value="1"
                                                                         {{ $training->kecepatan_gejala == '1' ? 'selected' : '' }}>
@@ -216,11 +221,11 @@
                                                                 <select name="riwayat_keluarga" id="riwayat_keluarga"
                                                                     class="form-control">
                                                                     <option value="0"
-                                                                        {{ $training->riwayat_keluarga == '0' ? 'selected' : '' }}>
-                                                                        Ya</option>
+                                                                        {{ $training->riwayat_keluarga == 0 ? 'selected' : '' }}>
+                                                                        Tidak</option>
                                                                     <option value="1"
                                                                         {{ $training->riwayat_keluarga == '1' ? 'selected' : '' }}>
-                                                                        Tidak</option>
+                                                                        Ya</option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
@@ -234,7 +239,7 @@
                                                                 <select name="jenis_kelamin" id="jenis_kelamin"
                                                                     class="form-control">
                                                                     <option value="0"
-                                                                        {{ $training->jenis_kelamin == '0' ? 'selected' : '' }}>
+                                                                        {{ $training->jenis_kelamin == 0 ? 'selected' : '' }}>
                                                                         Laki-laki</option>
                                                                     <option value="1"
                                                                         {{ $training->jenis_kelamin == '1' ? 'selected' : '' }}>
@@ -246,7 +251,7 @@
                                                                 <select name="tipe_diabetes" id="tipe_diabetes"
                                                                     class="form-control">
                                                                     <option value="0"
-                                                                        {{ $training->tipe_diabetes == '0' ? 'selected' : '' }}>
+                                                                        {{ $training->tipe_diabetes == 0 ? 'selected' : '' }}>
                                                                         Tipe 1</option>
                                                                     <option value="1"
                                                                         {{ $training->tipe_diabetes == '1' ? 'selected' : '' }}>
@@ -294,7 +299,7 @@
                                                 @endif
                                             </td>
                                             <td class="text-xs text-center font-weight-bold">
-                                                @if ($training->riwayat_keluarga == '0')
+                                                @if ($training->riwayat_keluarga == 0)
                                                     {{ 'Tidak' }}
                                                 @else
                                                     {{ 'Ya' }}
@@ -303,7 +308,7 @@
                                             <td class="text-xs text-center font-weight-bold">
                                                 {{ $training->berat_badan }}</td>
                                             <td class="text-xs text-center font-weight-bold">
-                                                @if ($training->jenis_kelamin == '0')
+                                                @if ($training->jenis_kelamin == 0)
                                                     {{ 'Laki-laki' }}
                                                 @else
                                                     {{ 'Perempuan' }}
