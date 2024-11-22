@@ -322,6 +322,10 @@
                                                 }
                                             @endphp</td>
                                             <td class="text-xs text-center font-weight-bold">
+                                                {{ $training->created_at }}</td>
+                                            <td class="text-xs text-center font-weight-bold">
+                                                {{ $training->updated_at }}</td>
+                                            <td class="text-xs text-center font-weight-bold">
                                                 <a href="#" class="btn btn-success btn-sm mt-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#editModal-{{ $training->id }}">
