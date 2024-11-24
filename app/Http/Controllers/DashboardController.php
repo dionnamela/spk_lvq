@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $pasiensCount = Pasien::count();
         $datalatihCount = Pelatihan::count();
 
-        // Ambil data latih dari database
+        // Ambil data latih dari tabel pelatihans
         $dataLatih = Pelatihan::all()->map(function ($pelatihan) {
             return [
                 'vector' => [
@@ -41,19 +41,31 @@ class DashboardController extends Controller
             ];
         })->toArray();
 
-        // Pastikan ada data latih
-        $akurasi = null;
-        if (!empty($dataLatih)) {
-            $jumlahLatih = floor(0.8 * count($dataLatih)); // 80% untuk latih
-            $dataLatihSet = array_slice($dataLatih, 0, $jumlahLatih); // Data latih
-            $dataUjiSet = array_slice($dataLatih, $jumlahLatih); // Data uji
+        // Ambil data uji dari tabel pasiens
+        $dataUji = Pasien::all()->map(function ($pasien) {
+            return [
+                'vector' => [
+                    $pasien->glukosa_darah_sewaktu,
+                    $pasien->glukosa_darah_puasa,
+                    $pasien->glukosa_dua_jam,
+                    $pasien->hba1c,
+                    $pasien->usia,
+                    $pasien->kecepatan_gejala,
+                    $pasien->riwayat_keluarga,
+                    $pasien->berat_badan,
+                    $pasien->jenis_kelamin,
+                ],
+                'tipe_diabetes' => $pasien->tipe_diabetes, // Asumsikan tabel pasiens memiliki kolom tipe_diabetes
+            ];
+        })->toArray();
 
-            if (!empty($dataLatihSet) && !empty($dataUjiSet)) {
-                // Latih model LVQ
-                $model = $this->lvqService->latihLVQ($dataLatihSet, 2); // 2 adalah jumlah kelas (tipe diabetes)
-                // Hitung akurasi
-                $akurasi = $this->lvqService->hitungAkurasi($dataUjiSet, $model);
-            }
+        // Pastikan ada data latih dan uji
+        $akurasi = null;
+        if (!empty($dataLatih) && !empty($dataUji)) {
+            // Latih model LVQ
+            $model = $this->lvqService->latihLVQ($dataLatih, 2); // 2 adalah jumlah kelas (tipe diabetes)
+            // Hitung akurasi
+            $akurasi = $this->lvqService->hitungAkurasi($dataUji, $model);
         }
 
         return view('dashboard', [

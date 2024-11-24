@@ -13,11 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Gideon Namlea Lesnusa',
-            'email' => 'dionnamlea@gmail.com',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+        ]);
+        User::factory()->create([
+            'name' => 'User',
+            'email' => 'user@gmail.com',
         ]);
 
         $this->call(PelatihanSeeder::class);
